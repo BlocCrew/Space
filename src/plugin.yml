@@ -1,0 +1,13 @@
+name: SpacePlugin
+version: 1.0.1
+description: This plugin allows you to automagically fly in a specified world or above a world height. a.k.a. "Space"
+author: norway240
+website: http://www.norway240.com
+main: com.norway240.spaceplugin.Space
+
+commands:
+   spaceplugin:
+      description: This displays and sets settings of the space plugin.
+      usage: /spaceplugin [[setting] [value]]
+      permission: spaceplugin.settings
+      permission-message: You don't have spaceplugin.settings

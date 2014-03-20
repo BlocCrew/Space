@@ -1,0 +1,7 @@
+Space:
+  world:
+    spaceworldenabled: true
+    spaceworldname: space
+  height:
+    spaceheightenabled: false
+    spaceheight: 128
