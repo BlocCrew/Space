@@ -29,6 +29,7 @@ public class Space extends JavaPlugin implements Listener {
 		config.addDefault("Space.world.spaceworldname", "space");
 		config.addDefault("Space.height.spaceheightenabled", false);
 		config.addDefault("Space.height.spaceheight", 128);
+		config.addDefault("Space.ignorecreative", false);
 		
 		config.options().copyDefaults(true);
 		saveConfig();
@@ -37,6 +38,7 @@ public class Space extends JavaPlugin implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event) {
+		//FileConfiguration config = getConfig();
 	    String spaceworld = "space";
 	    Player player = event.getPlayer();
 	    Location loc = player.getLocation();
@@ -59,17 +61,26 @@ public class Space extends JavaPlugin implements Listener {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		FileConfiguration config = getConfig();
 		if (cmd.getName().equalsIgnoreCase("spaceplugin")){
 				if(args.length == 1){
 					if (args[0].equalsIgnoreCase("reload")){
-						sender.sendMessage("Reloading SpacePlugin config");
-						//TODO: reload config
+						reloadConfig();
+						sender.sendMessage("Spaceplugin config reloaded");
 					}
 				}else if(args.length == 2){
 					if (args[0].equalsIgnoreCase("world")){
-						if (args[1].equalsIgnoreCase("true")){}
-						//TODO: else: set space world name
-						sender.sendMessage("Setting changed");
+						if (args[1].equalsIgnoreCase("true")){
+							config.set("Space.world.spaceworldenabled", true);
+							sender.sendMessage("Spaceworld enabled");
+						}else if(args[1].equalsIgnoreCase("false")){
+							config.set("Space.world.spaceworldenabled", false);
+							sender.sendMessage("Spaceworld disabled");
+						}else{
+							String newWorldName = args[1].toString();
+							config.set("Space.world.spaceworldname", newWorldName);
+							sender.sendMessage("Set Spaceworld to: " + newWorldName);
+						}
 					}
 					if (args[0].equalsIgnoreCase("height")){
 						if (args[1].equalsIgnoreCase("true")){}

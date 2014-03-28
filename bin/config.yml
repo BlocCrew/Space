@@ -5,3 +5,4 @@ Space:
   height:
     spaceheightenabled: false
     spaceheight: 128
+  ignorecreative: false
