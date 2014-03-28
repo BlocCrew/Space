@@ -1,7 +1,9 @@
-package com.norway240.spaceplugin;
+package com.norway240.spaceplugin; 
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -34,7 +36,7 @@ public class Space extends JavaPlugin implements Listener {
 	
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	  public void onPlayerMove(PlayerMoveEvent event) {
+	public void onPlayerMove(PlayerMoveEvent event) {
 	    String spaceworld = "space";
 	    Player player = event.getPlayer();
 	    Location loc = player.getLocation();
@@ -53,5 +55,36 @@ public class Space extends JavaPlugin implements Listener {
 	    	}
 	    }
 	    
-	  }
+	}
+	
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (cmd.getName().equalsIgnoreCase("spaceplugin")){
+				if(args.length == 1){
+					if (args[0].equalsIgnoreCase("reload")){
+						sender.sendMessage("Reloading SpacePlugin config");
+						//TODO: reload config
+					}
+				}else if(args.length == 2){
+					if (args[0].equalsIgnoreCase("world")){
+						if (args[1].equalsIgnoreCase("true")){}
+						//TODO: else: set space world name
+						sender.sendMessage("Setting changed");
+					}
+					if (args[0].equalsIgnoreCase("height")){
+						if (args[1].equalsIgnoreCase("true")){}
+						//TODO: else: set world space height
+						sender.sendMessage("Setting changed");
+					}
+				}else{
+					sender.sendMessage("SpacePlugin Commands:");
+					sender.sendMessage("/spaceplugin - shows this help info");
+					sender.sendMessage("/spaceplugin <setting> <value> - sets a config option");
+					sender.sendMessage("/spaceplugin reload - reloads the config");
+				}
+			return true;
+		}
+		return false;
+	}
+	
 }
